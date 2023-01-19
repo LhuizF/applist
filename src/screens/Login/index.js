@@ -3,26 +3,26 @@ import { View, Text, Button } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import LoginWithGoogle from "../../services/login";
 import UserModel from "../../services/firebase/user";
-//import Realm from "../../services/realm";
-
+import LocalStorage from "../../storage";
 
 export const Login = () => {
 
   const signInWithGoogle = async () => {
-    try {
-      const userWithToken = await LoginWithGoogle.signIn();
-
-      const user = await UserModel.loginUser(userWithToken);
-      //await Realm.saveUser(user);
-    } catch (e) {
-      console.log(e);
+    const userWithToken = await LoginWithGoogle.signIn();
+    const data = await UserModel.loginUser(userWithToken);
+    if (data.status === 'success') {
+      await LocalStorage.setItem('user', data.user);
     }
   }
 
   const getUser = async () => {
-    const id = '113924874318898274908'
-    const docs = await UserModel.verifyUser({ id });
-    console.log(docs)
+    const user = await LocalStorage.getItem('user');
+    console.log(user);
+  }
+
+  const deleteUser = async () => {
+    await LocalStorage.removeItem('user');
+    console.log('deleteUser');
   }
 
   return (
@@ -30,9 +30,10 @@ export const Login = () => {
       <View >
         <Text>Login</Text>
         <Button title="Sign in with Google" onPress={signInWithGoogle} />
-        <Text>Login</Text>
+        <Text>get user</Text>
         <Button title="get user" onPress={getUser} />
-        <Text>Login</Text>
+        <Text>delete user</Text>
+        <Button title="delete user" onPress={deleteUser} />
       </View>
     </SafeAreaView>
   );

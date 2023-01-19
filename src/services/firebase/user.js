@@ -9,7 +9,7 @@ class User {
   async verifyUser(query) {
     const user = await this.Database.simpleFind('users', query);
 
-    if(!user) return null;
+    if (!user) return null;
 
     return {
       ...user,
@@ -47,16 +47,14 @@ class User {
     }
 
     const user = {
+      id: data.id,
       name: data.name,
       email: data.email,
       image: data.picture,
       created_at: new Date()
     }
 
-    const id = Buffer.from(`${data.id}`).toString(40)
-
-
-    const docRef = await this.Database.createCollection('users', id, user);
+    const docRef = await this.Database.createCollection('users', user);
 
     if (!docRef) {
       return {
@@ -65,9 +63,11 @@ class User {
       }
     }
 
+    const userCreated = await this.Database.findById('users', docRef);
+
     return {
       status: 'success',
-      message: docRef
+      user: userCreated
     };
   }
 
@@ -81,8 +81,11 @@ class User {
 
     const userExists = await this.verifyUser({ id: data.id });
 
-    if(!!userExists) return userExists;
-
+    if (!!userExists) return ({
+      status: 'success',
+      user: userExists
+    });
+    console.log('user not exists');
     const user = await this.createUser(data);
 
     return user;

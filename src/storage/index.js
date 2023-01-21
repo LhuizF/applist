@@ -8,8 +8,8 @@ class LocalStorage {
   async setItem(key, value) {
     try {
       const isObject = typeof value === 'object';
-      const valueToStore = isObject ? JSON.stringify(value) : value;
-      await this.AsyncStorage.setItem(key, valueToStore);
+      const item = isObject ? JSON.stringify(value) : value;
+      await this.AsyncStorage.setItem(key, item);
     } catch (error) {
       console.log(error);
     }
@@ -19,8 +19,8 @@ class LocalStorage {
     try {
       const value = await this.AsyncStorage.getItem(key);
       const isObject = value && value[0] === '{';
-      const valueToReturn = isObject ? JSON.parse(value) : value;
-      return valueToReturn;
+      const item = isObject ? JSON.parse(value) : value;
+      return item;
     } catch (error) {
       console.log(error);
     }

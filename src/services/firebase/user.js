@@ -1,4 +1,3 @@
-import { Buffer } from "buffer";
 import Database from './database';
 
 class User {
@@ -64,7 +63,7 @@ class User {
     }
 
     const userCreated = await this.Database.findById('users', docRef);
-
+    console.log('Usuário criado com sucesso');
     return {
       status: 'success',
       user: userCreated
@@ -81,10 +80,14 @@ class User {
 
     const userExists = await this.verifyUser({ id: data.id });
 
-    if (!!userExists) return ({
-      status: 'success',
-      user: userExists
-    });
+    if (!!userExists) {
+      console.log('user exists');
+      return {
+        status: 'success',
+        user: userExists
+      }
+    }
+
     console.log('user not exists');
     const user = await this.createUser(data);
 

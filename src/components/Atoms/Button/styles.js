@@ -1,17 +1,7 @@
 import styled from 'styled-components/native';
 import colors from '../../../theme/colors';
 
-export const Container = styled.View`
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-`;
-
-export const Content = styled.View`
-  height: 400px;
-`;
-
-export const Button = styled.TouchableOpacity`
+export const ButtonContainer = styled.TouchableOpacity`
   background-color: ${colors.white};
   flex-direction: row;
   align-items: center;
@@ -32,11 +22,5 @@ export const Text = styled.Text`
   color: ${colors.black};
 `;
 
-export const Logo = styled.View`
-  width: 200px;
-  height: 200px;
-  background-color: ${colors.gray};
-  border-radius: 20px;
-  margin-bottom: 60px;
-`;
+
 

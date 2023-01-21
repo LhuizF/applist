@@ -3,7 +3,7 @@ import LoginWithGoogle from "../../services/login";
 import UserModel from "../../services/firebase/user";
 import LocalStorage from "../../storage";
 import { Container } from '../../components/Templates/container';
-import { LoginButton } from '../../components/Atoms/LoginButton';
+import { LoginContainer } from '../../components/Molecules/Login';
 
 export const Login = ({ navigation }) => {
 
@@ -28,7 +28,7 @@ export const Login = ({ navigation }) => {
 
   return (
     <Container>
-      <LoginButton onPress={signInWithGoogle} />
+      <LoginContainer onPress={signInWithGoogle} />
     </Container>
   );
 }

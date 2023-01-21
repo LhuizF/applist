@@ -1,0 +1,12 @@
+{
+  "client_Id": "",
+  "redirect_uri": "",
+  "firestore": {
+    "api_key": "",
+    "auth_domain": "",
+    "project_id": "",
+    "storage_bucket": "",
+    "messaging_sender_id": "",
+    "app_id": ""
+  }
+}

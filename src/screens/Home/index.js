@@ -1,8 +1,9 @@
 import React from "react";
 import { Text } from "react-native";
-import { Container } from '../../components/Templates/container'
+import { Loading } from "../../components/Atoms/Loading";
+import { Container } from '../../components/Templates/container';
 
-export default function Home() {
+export const Home = () => {
   return (
     <Container>
       <Text>Home</Text>

@@ -1,7 +1,7 @@
-import Navigator from './src/navigation'
+import { Navigation } from './src/navigation'
 
 export default function App() {
   return (
-    <Navigator />
+    <Navigation />
   );
 }

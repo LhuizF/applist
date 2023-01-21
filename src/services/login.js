@@ -8,8 +8,11 @@ class LoginWithGoogle {
     this.AuthSession = AuthSession;
   }
 
-  async signIn() {
+  async signIn({ isEmulator = false }) {
     try {
+      if (isEmulator) {
+        return { id: "113924874318898274908" }
+      }
       const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${this.clientId}&redirect_uri=${this.redirectUri}&response_type=token&scope=openid%20email%20profile`;
 
       const { type, params } = await this.AuthSession.startAsync({ authUrl });
@@ -28,3 +31,4 @@ class LoginWithGoogle {
 }
 
 export default new LoginWithGoogle(AuthSession);
+

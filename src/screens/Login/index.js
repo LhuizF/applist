@@ -4,25 +4,27 @@ import UserModel from "../../services/firebase/user";
 import LocalStorage from "../../storage";
 import { Container } from '../../components/Templates/container';
 import { LoginContainer } from '../../components/Molecules/Login';
+import colors from "../../theme/colors";
 
 export const Login = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const checkUser = async () => {
-      const user = await LocalStorage.getItem('user');
-      if (user) {
-        console.log('Usuário logado')
-        navigation.navigate('Home');
-      }
-      setIsLoading(false);
-    }
-    checkUser();
+    verifyLogin()
   }, [])
+
+  const verifyLogin = async () => {
+    const user = await LocalStorage.getItem('user');
+    if (user) {
+      console.log('Usuário logado')
+      navigation.navigate('Home');
+    }
+    setIsLoading(false);
+  }
 
   const signInWithGoogle = async () => {
     setIsLoading(true);
-    const userWithToken = await LoginWithGoogle.signIn();
+    const userWithToken = await LoginWithGoogle.signIn({ isEmulator: true });
     const data = await UserModel.loginUser(userWithToken);
     if (data.status === 'success') {
       await LocalStorage.setItem('user', data.user);
@@ -32,7 +34,7 @@ export const Login = ({ navigation }) => {
   }
 
   return (
-    <Container isLoading={isLoading} >
+    <Container isLoading={isLoading} color={colors.primary} >
       <LoginContainer onPress={signInWithGoogle} />
     </Container>
   );

@@ -1,11 +1,31 @@
 import React from 'react';
 import { ButtonContainer, Image, Text } from './styles';
 
-export const Button = ({ text = '', onPress, icon = '' }) => {
+export const Button = ({ type, ...props }) => {
+  if (!type) return null
+
+  return buttonsTypes[type](props);
+}
+
+const ButtonIcon = ({ text = '', onPress, icon, color, textColor }) => {
   return (
-    <ButtonContainer onPress={onPress}>
-      {!!icon ? <Image source={icon} /> : null}
-      <Text>{text}</Text>
+    <ButtonContainer onPress={onPress} color={color}>
+      {icon}
+      <Text textColor={textColor}>{text}</Text>
     </ButtonContainer>
   )
+}
+
+const ButtonImage = ({ text = '', onPress, imagePath = '', color, textColor }) => {
+  return (
+    <ButtonContainer onPress={onPress} color={color}>
+      {!!imagePath ? <Image source={imagePath} /> : null}
+      <Text textColor={textColor}>{text}</Text>
+    </ButtonContainer>
+  )
+}
+
+const buttonsTypes = {
+  icon: (p) => ButtonIcon(p),
+  image: (p) => ButtonImage(p),
 }

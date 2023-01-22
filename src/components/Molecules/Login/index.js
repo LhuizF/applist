@@ -9,7 +9,12 @@ export const LoginContainer = ({ onPress }) => {
     <Container>
       <Content>
         <Logo />
-        <Button icon={require(GOOGLE_LOGO_PATH)} text='Login' onPress={onPress} />
+        <Button
+          type='image'
+          text='Login'
+          imagePath={require(GOOGLE_LOGO_PATH)}
+          onPress={onPress}
+        />
       </Content>
     </Container>
   )

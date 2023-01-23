@@ -1,13 +1,19 @@
 import React, { useState } from "react";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 import { Container } from '../../components/Templates/container';
 import { Button } from '../../components/Atoms/Button';
 import colors from "../../theme/colors";
 import { AntDesign } from '@expo/vector-icons';
-import BottomSheetModal from 'react-native-reanimated'
+import { gestureHandlerRootHOC } from 'react-native-gesture-handler'
+import { BottomModal } from '../../components/Molecules/BottomModal';
 
 export const Home = ({ navigation }) => {
   const [list, setList] = useState([]);
+  const [modal, setModal] = useState(false);
+
+  const closeModal = () => {
+    setModal(false);
+  }
 
   return (
     <Container>
@@ -19,8 +25,11 @@ export const Home = ({ navigation }) => {
             color={colors.primary}
             textColor={colors.white}
             icon={<AntDesign name="plus" size={24} color={colors.white} />}
+            onPress={() => { setModal(true) }}
           />
-          <BottomSheetModal />
+          <BottomModal isOpen={modal} close={closeModal} >
+            <View style={{ flex: 1, backgroundColor: colors.primary }} />
+          </BottomModal>
         </>
       ) : (
         <Text>Listar</Text>
@@ -28,3 +37,5 @@ export const Home = ({ navigation }) => {
     </Container>
   );
 }
+
+// export const Home = gestureHandlerRootHOC(HomeScreen);

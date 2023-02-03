@@ -20,8 +20,8 @@ export const Menu = ({ closeModal }) => {
 
   return (
     <Container>
-      <TextButton text='Adicionar lista' />
-      <TextButton text='Ler lista' onPress={getUser} />
+      {/* <TextButton text='Adicionar lista' /> */}
+      <TextButton text='Ler QRcode' onPress={getUser} />
       <TextButton text='Sair' onPress={logout} />
     </Container>
   );

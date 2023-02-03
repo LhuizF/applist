@@ -6,6 +6,8 @@ import colors from "../../theme/colors";
 import { AntDesign } from '@expo/vector-icons';
 import { gestureHandlerRootHOC } from 'react-native-gesture-handler'
 import { BottomModal } from '../../components/Molecules/BottomModal';
+import { ListForm } from '../../components/Organisms/Form/ListForm'
+
 
 export const Home = ({ navigation }) => {
   const [list, setList] = useState([]);
@@ -27,8 +29,8 @@ export const Home = ({ navigation }) => {
             icon={<AntDesign name="plus" size={24} color={colors.white} />}
             onPress={() => { setModal(true) }}
           />
-          <BottomModal isOpen={modal} close={closeModal} >
-            <View style={{ flex: 1, backgroundColor: colors.primary }} />
+          <BottomModal isOpen={modal} close={closeModal} max="36" >
+            <ListForm closeModal={closeModal} />
           </BottomModal>
         </>
       ) : (

@@ -32,20 +32,39 @@ class Database {
     }
   }
 
-  async simpleFind(collectionName, dataQuery) {
+  async FindOne(collectionName, dataQuery) {
     try {
-      const collectionRef = collection(this.db, collectionName)
+      const collectionRef = collection(this.db, collectionName);
 
       const [q] = Object.keys(dataQuery).map(key => {
         return query(collectionRef, where(key, '==', dataQuery[key]))
-      })
+      });
 
       const querySnapshot = await getDocs(q)
-      const [user] = querySnapshot.docs.map(doc => doc.data())
+      const [item] = querySnapshot.docs.map(doc => doc.data())
 
-      return user
+      return item
     } catch (e) {
-      console.log('simpleFind', e);
+      console.log('FindOne', e);
+
+      return null
+    }
+  }
+
+  async findMore(collectionName, dataQuery, operator = '==') {
+    try {
+      const collectionRef = collection(this.db, collectionName);
+
+      const [q] = Object.keys(dataQuery).map(key => {
+        return query(collectionRef, where(key, operator, dataQuery[key]))
+      });
+
+      const querySnapshot = await getDocs(q)
+      const items = querySnapshot.docs.map(doc => doc.data())
+
+      return items
+    } catch (e) {
+      console.log('findMore', e);
 
       return null
     }
@@ -62,6 +81,7 @@ class Database {
       return null
     }
   }
+
 }
 
 export default new Database(app);

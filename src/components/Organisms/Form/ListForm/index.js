@@ -4,7 +4,7 @@ import { Container, Text } from './styles';
 import { Input } from '../../../Atoms/Input';
 import { Button } from '../../../Atoms/Button';
 import colors from '../../../../theme/colors';
-import ListModel from '../../../../services/firebase/list';
+import ListModel from '../../../../services/firebase/List';
 import Storage from '../../../../storage';
 
 export const ListForm = ({ closeModal }) => {
@@ -22,6 +22,7 @@ export const ListForm = ({ closeModal }) => {
     const res = await ListModel.createList({
       userId: user.id,
       name: nameList,
+      description
     })
 
     if (res.status === 'error') {

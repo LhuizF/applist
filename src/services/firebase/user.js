@@ -6,7 +6,7 @@ class User {
   }
 
   async verifyUser(query) {
-    const user = await this.Database.simpleFind('users', query);
+    const user = await this.Database.FindOne('users', query);
 
     if (!user) return null;
 

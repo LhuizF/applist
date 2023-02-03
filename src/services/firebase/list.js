@@ -1,7 +1,7 @@
 
 import { uuidv4 } from '@firebase/util';
 import Database from './database';
-import listUser from './listUser';
+import listUser from './UserList';
 
 class List {
   constructor(db, listUser) {

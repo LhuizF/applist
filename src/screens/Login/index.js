@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import LoginWithGoogle from "../../services/login";
-import UserModel from "../../services/firebase/user";
+import UserModel from "../../services/firebase/User";
 import LocalStorage from "../../storage";
 import { Container } from '../../components/Templates/container';
 import { LoginContainer } from '../../components/Molecules/Login';

@@ -9,7 +9,6 @@ import { ListForm } from '../../components/Organisms/Form/ListForm'
 import listUser from "../../services/firebase/UserList";
 import storage from "../../storage";
 
-
 export const Home = ({ navigation }) => {
   const [list, setList] = useState([]);
   const [modal, setModal] = useState(false);
@@ -55,5 +54,3 @@ export const Home = ({ navigation }) => {
     </Container>
   );
 }
-
-// export const Home = gestureHandlerRootHOC(HomeScreen);

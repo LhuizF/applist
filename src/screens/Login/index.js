@@ -5,37 +5,41 @@ import LocalStorage from "../../storage";
 import { Container } from '../../components/Templates/container';
 import { LoginContainer } from '../../components/Molecules/Login';
 import colors from "../../theme/colors";
+import auth from '@react-native-firebase/auth';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { useAuth } from "../../context/auth";
+import { Button } from "../../components/Atoms/Button";
+import { set } from "react-native-reanimated";
+
+
 
 export const Login = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(true);
+  const { signIn, signOut, user } = useAuth();
 
   useEffect(() => {
-    verifyLogin()
-  }, [])
+    (async () => {
+      if (user) {
+        await navigation.navigate('Home')
+      }
+      setIsLoading(false)
+    })()
+  }, [user])
 
-  const verifyLogin = async () => {
-    const user = await LocalStorage.getItem('user');
-    if (user) {
-      console.log('Usuário logado')
-      navigation.navigate('Home');
+  const handleSignIn = async () => {
+    setIsLoading(true)
+    const isLogged = await signIn()
+    if (isLogged) {
+      await navigation.navigate('Home')
+      return;
     }
-    setIsLoading(false);
-  }
-
-  const signInWithGoogle = async () => {
-    setIsLoading(true);
-    const userWithToken = await LoginWithGoogle.signIn({ isEmulator: true });
-    const data = await UserModel.loginUser(userWithToken);
-    if (data.status === 'success') {
-      await LocalStorage.setItem('user', data.user);
-      navigation.navigate('Home');
-    }
-    setIsLoading(false);
+    setIsLoading(false)
   }
 
   return (
     <Container isLoading={isLoading} color={colors.primary} >
-      <LoginContainer onPress={signInWithGoogle} />
+      <LoginContainer onPress={handleSignIn} />
+
     </Container>
   );
 }

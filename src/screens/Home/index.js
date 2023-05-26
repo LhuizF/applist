@@ -20,7 +20,9 @@ export const Home = ({ navigation }) => {
   useEffect(() => {
     const getDate = async () => {
       const user = await storage.getItem('user');
-
+      if (!user) {
+        return;
+      }
       const lists = await listUser.getListsByUserId(user.id)
       setList(lists.data)
     }

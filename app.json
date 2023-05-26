@@ -25,10 +25,18 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "googleServicesFile": "./google-services.json",
+      "package": "com.luizhff.applist"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "86638ace-de25-4b35-b128-17f4108d8c93"
+      }
+    },
+    "plugins":  ["@react-native-google-signin/google-signin"]
   }
 }

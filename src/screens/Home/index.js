@@ -6,7 +6,6 @@ import colors from "../../theme/colors";
 import { AntDesign } from '@expo/vector-icons';
 import { BottomModal } from '../../components/Molecules/BottomModal';
 import { ListForm } from '../../components/Organisms/Form/ListForm'
-import listUser from "../../services/firebase/UserList";
 import storage from "../../storage";
 
 export const Home = ({ navigation }) => {
@@ -23,8 +22,9 @@ export const Home = ({ navigation }) => {
       if (!user) {
         return;
       }
-      const lists = await listUser.getListsByUserId(user.id)
-      setList(lists.data)
+
+      //TODO: get list from api
+
     }
 
     getDate()

@@ -15,6 +15,11 @@ export const Menu = ({ closeModal }) => {
     navigation.navigate('Login');
   }
 
+  const getUser = async () => {
+    const user = await Storage.getItem('user');
+    console.log(user);
+  }
+
   return (
     <Container>
       {/* <TextButton text='Adicionar lista' /> */}

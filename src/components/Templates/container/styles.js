@@ -4,8 +4,8 @@ import colors from '../../../theme/colors';
 
 export const MainContainer = styled(SafeAreaView)`
   background-color: ${props => props.color ? props.color : colors.white};
-  //padding: 10px;
   width: 100%;
   height: 100%;
   align-items: center;
+  justify-content: ${props => props.center ? 'center' : 'flex-start'};
 `;

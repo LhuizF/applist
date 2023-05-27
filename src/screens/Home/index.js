@@ -7,25 +7,29 @@ import { AntDesign } from '@expo/vector-icons';
 import { useAuth } from "../../context/auth";
 import firebase from "../../services/firebase";
 import { useBottomModal } from '../../context/bottomModal'
+import { ListTable } from "../../components/Organisms/ListTable";
 
 export const Home = ({ navigation }) => {
+  const [isLoading, setIsLoading] = useState(true);
   const [list, setList] = useState([]);
   const { user } = useAuth();
   const { openModal } = useBottomModal();
 
   useEffect(() => {
     if (user) {
-      firebase.getListsByUserId(user.id).then((res) => {
-        setList(res);
-      }).catch((err) => {
-        console.log(err);
-      })
+      firebase.getListsByUserId(user.id, setList)
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     }
 
   }, [])
 
   return (
-    <Container>
+    <Container isLoading={isLoading} center={list.length === 0}>
       {!list.length > 0 ? (
         <>
           <Button
@@ -39,10 +43,7 @@ export const Home = ({ navigation }) => {
 
         </>
       ) : (
-        <>
-          <Text>Lista</Text>
-          {list.map((item) => <Text>{item.name}</Text>)}
-        </>
+        <ListTable lists={list} />
       )
       }
     </Container>

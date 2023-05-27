@@ -34,21 +34,33 @@ export const TableItems = ({ items = [] }) => {
     setItemsState(newItens)
   }
 
+  console.log('itemsState', items)
+
   return (
     <View style={styles.container} >
-      <FlatList
-        data={itemsState}
-        renderItem={({ item }) => (
-          <TouchableOpacity style={styles.card} onPress={() => onPressItem(item)} >
-            <Text style={{ ...styles.title, textDecorationLine: item.checked ? 'line-through' : 'none' }} >
-              {item.name}
-            </Text>
-            <View style={{ flexDirection: 'row' }} >
-              <Text style={styles.dateText} >Criado em {formattedDate(item.createdAt)}</Text>
-            </View>
-          </TouchableOpacity>
+
+      {items.length === 0 ?
+        <View style={{ paddingVertical: 20, backgroundColor: colors.white, borderRadius: 10 }} >
+          <Text style={{ textAlign: 'center', fontSize: 20, fontWeight: '500' }} >
+            Nenhum item salvo
+          </Text>
+        </View>
+        : (
+          <FlatList
+            data={itemsState}
+            renderItem={({ item }) => (
+              <TouchableOpacity style={styles.card} onPress={() => onPressItem(item)} >
+                <Text style={{ ...styles.title, textDecorationLine: item.checked ? 'line-through' : 'none' }} >
+                  {item.name}
+                </Text>
+                <View style={{ flexDirection: 'row' }} >
+                  <Text style={styles.dateText} >Criado em {formattedDate(item.createdAt)}</Text>
+                </View>
+              </TouchableOpacity>
+            )}
+          />
         )}
-      />
+
     </View>
   );
 }

@@ -7,7 +7,6 @@ import colors from '../../../../theme/colors';
 import storage from '../../../../storage';
 import firebase from '../../../../services/firebase';
 
-
 export const ListForm = ({ closeModal }) => {
   const [nameList, setNameList] = useState('');
   const [description, setDescription] = useState('');

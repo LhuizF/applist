@@ -70,16 +70,23 @@ class Firebase {
         const listData = snapshot.val();
         const items = listData?.items || [];
 
-        update(databaseRef, {
-          items: [...items, item]
+        const listRef = ref(this.database, listId + '/items');
+
+        push(listRef, item).then((newRef) => {
+          console.log('Chave gerada:', newRef.key);
+          return newRef.key;
+        }).catch((error) => {
+          console.error('Erro ao adicionar dado:', error);
+          return null;
         })
 
       }
 
-    }).then((lastId) => {
-      console.log("Último ID:", lastId);
+    }).then(() => {
+      return true
     }).catch((error) => {
       console.error("Ocorreu um erro ao obter o último ID:", error);
+      return false;
     });
 
   }
@@ -90,11 +97,30 @@ class Firebase {
     get(databaseRef).then((snapshot) => {
       if (snapshot.exists()) {
         const listData = snapshot.val();
-        const items = listData?.items || [];
+        const items = listData?.items || {};
+        const itemsArray = []
 
-        setItems(items)
+        Object.keys(items).forEach((key) => {
+          itemsArray.push({ key, ...items[key] })
+        })
+        setItems(itemsArray)
       }
     })
+  }
+
+  async checkItem({ listId, itemId, checked }) {
+    const itemRef = ref(this.database, listId + '/items/' + itemId);
+
+    const data = {
+      checked: checked,
+      completeDate: checked ? new Date().toISOString() : '',
+    }
+
+    update(itemRef, data).then(() => {
+      console.log('Item atualizado com sucesso!');
+    }).catch((error) => {
+      console.error('Erro ao atualizar item:', error);
+    });
   }
 }
 

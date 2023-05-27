@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Container } from '../../components/Templates/container';
 import { ListItemsHeader } from '../../components/Atoms/ListItemsHeader';
 import { TableItems } from "../../components/Organisms/TableItems";
@@ -7,7 +7,6 @@ import { FloatingButton } from "../../components/Atoms/FloatingButton";
 import { AddItem } from "../../components/Organisms/AddItem";
 import firebase from "../../services/firebase";
 import { useAuth } from '../../context/auth'
-import { ScrollView } from "react-native";
 
 export const ListItems = ({ navigation, route }) => {
   const [modalVisible, setModalVisible] = useState(false)

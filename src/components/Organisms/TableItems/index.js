@@ -10,7 +10,7 @@ export const TableItems = ({ listKey }) => {
 
 
   function onPressItem(item) {
-    console.log(itemsState)
+    firebase.checkItem({ listId: listKey, itemId: item.key, checked: !item.checked })
   }
 
   const renderItem = ({ item, index }) => {
@@ -23,8 +23,13 @@ export const TableItems = ({ listKey }) => {
         <Text style={{ ...styles.title, textDecorationLine: item.checked ? 'line-through' : 'none' }} >
           {item.name}
         </Text>
-        <View style={{ flexDirection: 'row' }} >
-          <Text style={styles.dateText} >Criado em {formattedDate(item.createdAt)}</Text>
+        <View style={{ flexDirection: 'column', justifyContent: 'space-between' }} >
+          <View style={{ flexDirection: 'row', }} >
+            <Text style={styles.dateText} >Criado em {formattedDate(item.createdAt)}</Text>
+          </View>
+          <View style={{ flexDirection: 'row', }} >
+            {!!item.completeDate && <Text style={styles.dateText} >Concluído em {formattedDate(item.completeDate)}</Text>}
+          </View>
         </View>
       </TouchableOpacity>
     )

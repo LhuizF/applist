@@ -7,10 +7,13 @@ import { AntDesign } from '@expo/vector-icons';
 import { BottomModal } from '../../components/Molecules/BottomModal';
 import { ListForm } from '../../components/Organisms/Form/ListForm'
 import storage from "../../storage";
+import { useAuth } from "../../context/auth";
+import firebase from "../../services/firebase";
 
 export const Home = ({ navigation }) => {
   const [list, setList] = useState([]);
   const [modal, setModal] = useState(false);
+  const { user } = useAuth();
 
   const closeModal = () => {
     setModal(false);
@@ -29,6 +32,15 @@ export const Home = ({ navigation }) => {
 
     getDate()
   }, []);
+
+  useEffect(() => {
+    async function get() {
+      if (user) {
+        await firebase.getListsByUserId(user.id)
+      }
+    }
+    get() 
+  }, [])
 
   return (
     <Container>

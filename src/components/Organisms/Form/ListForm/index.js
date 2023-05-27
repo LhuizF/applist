@@ -4,8 +4,9 @@ import { Container, Text } from './styles';
 import { Input } from '../../../Atoms/Input';
 import { Button } from '../../../Atoms/Button';
 import colors from '../../../../theme/colors';
+import storage from '../../../../storage';
+import firebase from '../../../../services/firebase';
 
-import Storage from '../../../../storage';
 
 export const ListForm = ({ closeModal }) => {
   const [nameList, setNameList] = useState('');
@@ -18,22 +19,35 @@ export const ListForm = ({ closeModal }) => {
   }
 
   const handleSave = async () => {
-    const user = await Storage.getItem('user');
+    const user = await storage.getItem('user');
 
+    if (!user) {
+      ToastAndroid.show('Você precisa estar logado para criar uma lista', ToastAndroid.SHORT);
+      return;
+    }
 
-    // if (res.status === 'error') {
-    //   console.log(res.message);
-    //   if(Array.isArray(res.message)) {
-    //     res.message.map((msg) => {
-    //       ToastAndroid.show(msg, ToastAndroid.SHORT);
-    //     })
-    //     return
-    //   }
-    //   ToastAndroid.show(res.message, ToastAndroid.SHORT);
-    //   return
-    // }
-    // handlerCloseForm();
-    // ToastAndroid.show(res.message, ToastAndroid.SHORT);
+    if (!nameList) {
+      ToastAndroid.show('Você precisa informar o nome da lista', ToastAndroid.SHORT);
+      return;
+    }
+
+    const list = {
+      users: {
+        0: user.id
+      },
+      name: nameList,
+      description,
+      createdAt: new Date().toISOString()
+    }
+
+    const res = await firebase.createList(list);
+
+    if (!res) {
+      ToastAndroid.show('Erro ao criar lista', ToastAndroid.SHORT);
+      return
+    }
+
+    handlerCloseForm();
   }
 
   return (

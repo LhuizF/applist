@@ -1,67 +1,51 @@
 import React from "react";
-import { View, Text, StyleSheet, FlatList, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import colors from "../../../theme/colors";
 import { formattedDate } from '../../../utils'
+import firebase from "../../../services/firebase";
 
-const itemsFake = [
-  {
-    id: 1,
-    name: 'Item 1',
-    createdAt: new Date().toISOString(),
-    checked: false,
-  },
-  {
-    id: 2,
-    name: 'Item 2',
-    createdAt: new Date().toISOString(),
-    checked: true,
-  }
-]
+export const TableItems = ({ listKey }) => {
+  const [itemsState, setItemsState] = React.useState([])
+  firebase.findItensByListId(listKey, setItemsState)
 
-
-
-export const TableItems = ({ items = [] }) => {
-  const [itemsState, setItemsState] = React.useState(itemsFake)
 
   function onPressItem(item) {
-    const newItens = itemsState.map(i => {
-      if (i.id === item.id) {
-        return { ...i, checked: !i.checked }
-      }
-      return i
-    })
-
-    setItemsState(newItens)
+    console.log(itemsState)
   }
 
-  console.log('itemsState', items)
+  const renderItem = ({ item, index }) => {
+    return (
+      <TouchableOpacity
+        style={styles.card}
+        activeOpacity={0.8}
+        onPress={() => onPressItem(item)} key={index}
+      >
+        <Text style={{ ...styles.title, textDecorationLine: item.checked ? 'line-through' : 'none' }} >
+          {item.name}
+        </Text>
+        <View style={{ flexDirection: 'row' }} >
+          <Text style={styles.dateText} >Criado em {formattedDate(item.createdAt)}</Text>
+        </View>
+      </TouchableOpacity>
+    )
+  }
 
   return (
-    <View style={styles.container} >
+    <ScrollView style={styles.container} >
 
-      {items.length === 0 ?
+      {itemsState.length === 0 ?
         <View style={{ paddingVertical: 20, backgroundColor: colors.white, borderRadius: 10 }} >
           <Text style={{ textAlign: 'center', fontSize: 20, fontWeight: '500' }} >
             Nenhum item salvo
           </Text>
         </View>
         : (
-          <FlatList
-            data={itemsState}
-            renderItem={({ item }) => (
-              <TouchableOpacity style={styles.card} onPress={() => onPressItem(item)} >
-                <Text style={{ ...styles.title, textDecorationLine: item.checked ? 'line-through' : 'none' }} >
-                  {item.name}
-                </Text>
-                <View style={{ flexDirection: 'row' }} >
-                  <Text style={styles.dateText} >Criado em {formattedDate(item.createdAt)}</Text>
-                </View>
-              </TouchableOpacity>
-            )}
-          />
-        )}
-
-    </View>
+          <>
+            {itemsState.map((item, index) => renderItem({ item, index }))}
+          </>
+        )
+      }
+    </ScrollView>
   );
 }
 
@@ -71,6 +55,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 15,
     marginTop: -40,
+    flex: 1,
     backgroundColor: colors.gray,
   },
   card: {

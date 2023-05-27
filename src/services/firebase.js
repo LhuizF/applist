@@ -1,4 +1,4 @@
-import { get, push, ref } from 'firebase/database';
+import { get, push, ref, child, update } from 'firebase/database';
 import { database } from '../config/firebase'
 import dbRealTime from '@react-native-firebase/database';
 
@@ -50,13 +50,50 @@ class Firebase {
       const listData = snapshot.val();
       const listArray = []
 
-      Object.keys(listData).forEach((key) => {
-        if (listData[key].users && listData[key].users.includes(userId)) {
-          listArray.push(listData[key])
-        }
-      })
+      if (!!listData) {
+        Object.keys(listData).forEach((key) => {
+          if (listData[key].users && listData[key].users.includes(userId)) {
+            listArray.push({ key, ...listData[key] })
+          }
+        })
+        setList(listArray)
+      }
+    })
+  }
 
-      setList(listArray)
+  async insertItem(listId, item) {
+    const databaseRef = ref(this.database, listId);
+
+    get(databaseRef).then((snapshot) => {
+
+      if (snapshot.exists()) {
+        const listData = snapshot.val();
+        const items = listData?.items || [];
+
+        update(databaseRef, {
+          items: [...items, item]
+        })
+
+      }
+
+    }).then((lastId) => {
+      console.log("Último ID:", lastId);
+    }).catch((error) => {
+      console.error("Ocorreu um erro ao obter o último ID:", error);
+    });
+
+  }
+
+  async findItensByListId(listId, setItems) {
+    const databaseRef = ref(this.database, listId);
+
+    get(databaseRef).then((snapshot) => {
+      if (snapshot.exists()) {
+        const listData = snapshot.val();
+        const items = listData?.items || [];
+
+        setItems(items)
+      }
     })
   }
 }

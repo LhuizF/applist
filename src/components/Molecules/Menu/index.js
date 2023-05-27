@@ -3,12 +3,16 @@ import { Container } from './styles';
 import { TextButton } from '../../Atoms/TextButton'
 import Storage from '../../../storage';
 import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../../../context/auth';
+import { useBottomModal } from '../../../context/bottomModal';
 
 export const Menu = ({ closeModal }) => {
   const navigation = useNavigation();
+  const { signOut } = useAuth();
+  const { openModal } = useBottomModal();
 
   const logout = async () => {
-    await Storage.removeItem('user');
+    await signOut();
     closeModal();
     navigation.navigate('Login');
   }
@@ -18,9 +22,14 @@ export const Menu = ({ closeModal }) => {
     console.log(user);
   }
 
+  const openListForm = () => {
+    closeModal();
+    openModal();
+  }
+
   return (
     <Container>
-      {/* <TextButton text='Adicionar lista' /> */}
+      <TextButton text='Adicionar lista' onPress={openListForm} />
       <TextButton text='Ler QRcode' onPress={getUser} />
       <TextButton text='Sair' onPress={logout} />
     </Container>

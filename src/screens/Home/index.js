@@ -4,32 +4,32 @@ import { Container } from '../../components/Templates/container';
 import { Button } from '../../components/Atoms/Button';
 import colors from "../../theme/colors";
 import { AntDesign } from '@expo/vector-icons';
-import { BottomModal } from '../../components/Molecules/BottomModal';
-import { ListForm } from '../../components/Organisms/Form/ListForm'
-import listUser from "../../services/firebase/UserList";
-import storage from "../../storage";
+import { useAuth } from "../../context/auth";
+import firebase from "../../services/firebase";
+import { useBottomModal } from '../../context/bottomModal'
+import { ListTable } from "../../components/Organisms/ListTable";
 
 export const Home = ({ navigation }) => {
+  const [isLoading, setIsLoading] = useState(true);
   const [list, setList] = useState([]);
-  const [modal, setModal] = useState(false);
-
-  const closeModal = () => {
-    setModal(false);
-  }
+  const { user } = useAuth();
+  const { openModal } = useBottomModal();
 
   useEffect(() => {
-    const getDate = async () => {
-      const user = await storage.getItem('user');
-
-      const lists = await listUser.getListsByUserId(user.id)
-      setList(lists.data)
+    if (user) {
+      firebase.getListsByUserId(user.id, setList)
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     }
 
-    getDate()
-  }, []);
+  }, [])
 
   return (
-    <Container>
+    <Container isLoading={isLoading} center={list.length === 0}>
       {!list.length > 0 ? (
         <>
           <Button
@@ -38,17 +38,12 @@ export const Home = ({ navigation }) => {
             color={colors.primary}
             textColor={colors.white}
             icon={<AntDesign name="plus" size={24} color={colors.white} />}
-            onPress={() => { setModal(true) }}
+            onPress={() => openModal()}
           />
-          <BottomModal isOpen={modal} close={closeModal} max="36" >
-            <ListForm closeModal={closeModal} />
-          </BottomModal>
+
         </>
       ) : (
-        <>
-          <Text>Lista</Text>
-          {list.map((item) => <Text>{item.name}</Text>)}
-        </>
+        <ListTable lists={list} />
       )
       }
     </Container>

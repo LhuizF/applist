@@ -4,7 +4,7 @@ import { Logo } from "../../Atoms/Logo";
 import { Container, Content } from "./styles";
 const GOOGLE_LOGO_PATH = '../../../assets/images/google-logo.png'
 
-export const LoginContainer = ({ onPress }) => {
+export const LoginContainer = ({ onPress, onPressT }) => {
   return (
     <Container>
       <Content>

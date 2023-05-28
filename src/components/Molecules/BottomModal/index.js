@@ -18,8 +18,12 @@ export const BottomModal = ({ children, isOpen, close, max = '40%' }) => {
 
   return (
     <>
-      {isOpen && <Container onPress={close} />}
-      <BottomSheet
+      {isOpen &&
+        <Container onPress={close} >
+          {children}
+        </Container>
+      }
+      {/* <BottomSheet
         ref={bottomSheetRef}
         snapPoints={[1, max]}
         backgroundStyle={{ backgroundColor: colors.primary }}
@@ -36,10 +40,10 @@ export const BottomModal = ({ children, isOpen, close, max = '40%' }) => {
             width: '100%',
             height: '100%',
           }}
-        >
-          {children}
-        </View>
-      </BottomSheet >
+        > */}
+
+      {/* </View>
+      </BottomSheet > */}
     </>
   );
 }

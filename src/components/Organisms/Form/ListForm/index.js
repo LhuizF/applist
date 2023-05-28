@@ -46,6 +46,8 @@ export const ListForm = ({ closeModal }) => {
       return
     }
 
+    ToastAndroid.show('Lista criada com sucesso', ToastAndroid.SHORT);
+
     handlerCloseForm();
   }
 

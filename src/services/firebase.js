@@ -122,6 +122,33 @@ class Firebase {
       console.error('Erro ao atualizar item:', error);
     });
   }
+
+  async joinList({ listId, userId }) {
+    const listRef = ref(this.database, listId + '/users');
+
+    return get(listRef).then((snapshot) => {
+      if (snapshot.exists()) {
+        const users = snapshot.val();
+        const usersArray = Object.values(users) || [];
+
+        if (!usersArray.includes(userId)) {
+          usersArray.push(userId);
+
+          const objUser = Object.assign({}, usersArray);
+
+          return update(listRef, objUser).then(() => {
+            console.log('Usuário adicionado com sucesso!');
+            return true
+          }).catch((error) => {
+            console.error('Erro ao adicionar usuário:', error);
+            return false
+          });
+        }
+      }
+
+      return false
+    })
+  }
 }
 
 

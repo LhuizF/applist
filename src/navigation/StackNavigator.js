@@ -1,6 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Login, Home, ListItems } from "../screens";
+import { Login, Home, ListItems, JoinList } from "../screens";
 import colors from "../theme/colors";
 import { MenuOptions } from '../components/Organisms/MenuOptions'
 import { useAuth } from "../context/auth";
@@ -37,7 +37,13 @@ export const Navigation = () => {
 
           }
         }} />
-
+        <Stack.Screen name="JoinList" component={JoinList} options={{
+          headerTintColor: colors.white,
+          headerStyle: {
+            backgroundColor: colors.primary
+          },
+          title: 'Entrar em uma lista'
+        }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

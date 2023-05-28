@@ -17,9 +17,9 @@ export const Menu = ({ closeModal }) => {
     navigation.navigate('Login');
   }
 
-  const getUser = async () => {
-    const user = await Storage.getItem('user');
-    console.log(user);
+  const goToJoinList = async () => {
+    closeModal();
+    navigation.navigate('JoinList')
   }
 
   const openListForm = () => {
@@ -30,7 +30,7 @@ export const Menu = ({ closeModal }) => {
   return (
     <Container>
       <TextButton text='Adicionar lista' onPress={openListForm} />
-      <TextButton text='Ler QRcode' onPress={getUser} />
+      <TextButton text='Entrar em uma lista' onPress={goToJoinList} />
       <TextButton text='Sair' onPress={logout} />
     </Container>
   );

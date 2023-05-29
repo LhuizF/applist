@@ -1,9 +1,10 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Login, Home, ListItems } from "../screens";
+import { Login, Home, ListItems, JoinList } from "../screens";
 import colors from "../theme/colors";
 import { MenuOptions } from '../components/Organisms/MenuOptions'
 import { useAuth } from "../context/auth";
+import { Share } from '../components/Organisms/Share'
 
 const Stack = createStackNavigator();
 
@@ -24,6 +25,7 @@ export const Navigation = () => {
         }} />
         <Stack.Screen name="ListItems" component={ListItems} options={({ route }) => {
           const name = route.params.list.name;
+          const key = route.params.list.key;
 
           return {
             headerTintColor: colors.white,
@@ -32,12 +34,18 @@ export const Navigation = () => {
               elevation: 0,
               shadowOpacity: 0
             },
-            headerRight: MenuOptions,
+            headerRight: () => <Share listId={key} />,
             title: null,
 
           }
         }} />
-
+        <Stack.Screen name="JoinList" component={JoinList} options={{
+          headerTintColor: colors.white,
+          headerStyle: {
+            backgroundColor: colors.primary
+          },
+          title: 'Entrar em uma lista'
+        }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

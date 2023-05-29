@@ -31,7 +31,8 @@ export const AddItem = ({ active, openModal, listName = '', saveItem }) => {
           <Text style={styles.title}>Novo item</Text>
           <View style={styles.form} >
             <Text style={styles.subTitle} >Lista {listName}</Text>
-            <Input placeholder="Nome do item"
+            <Input
+              placeholder="Nome do item"
               value={itemNome}
               onChangeText={setItemNome}
             />

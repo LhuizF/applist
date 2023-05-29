@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ModalOptions } from '../../Molecules/Modal'
 import { Entypo } from '@expo/vector-icons';
 import { TouchableOpacity, Text, View, ToastAndroid } from "react-native";
 import colors from "../../../theme/colors";
 import { Button } from "../../Atoms/Button";
 import Clipboard from '@react-native-clipboard/clipboard';
+import QRCode from 'react-native-qrcode-svg';
 
 export const Share = ({ listId }) => {
   const [modalVisible, setModalVisible] = useState(false)
@@ -18,6 +19,7 @@ export const Share = ({ listId }) => {
     Clipboard.setString(listId)
     ToastAndroid.show('Copiado para área de transferência', ToastAndroid.SHORT);
   }
+
 
   return (
     <View>
@@ -39,6 +41,14 @@ export const Share = ({ listId }) => {
               >
                 <Text style={styles.code}>{listId}</Text>
               </TouchableOpacity>
+              <View style={styles.qrCodeContainer} >
+                <View style={styles.qrCode} >
+                  <QRCode
+                    value={listId}
+                    size={200}
+                  />
+                </View>
+              </View>
               <Button
                 type={'icon'}
                 text="Fechar"
@@ -89,8 +99,21 @@ const styles = {
     fontSize: 16,
     fontWeight: '600',
     backgroundColor: colors.gray,
-    padding: 5,
+    paddingHorizontal: 12,
+    paddingVertical: 5,
+    borderRadius: 8,
+  },
+  qrCodeContainer: {
+    height: 200,
+    width: '100%',
+    marginBottom: 45,
+    marginTop: 20,
+    alignItems: 'center'
+  },
+  qrCode: {
+    padding: 10,
     borderRadius: 10,
-    marginBottom: 10,
+    borderWidth: 5,
+    borderColor: colors.primary,
   }
 }

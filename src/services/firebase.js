@@ -2,8 +2,6 @@ import { get, push, ref, child, update } from 'firebase/database';
 import { database } from '../config/firebase'
 import dbRealTime from '@react-native-firebase/database';
 
-
-
 class Firebase {
   constructor(database, firestore) {
     this.database = database;

@@ -1,4 +1,4 @@
-import { get, push, ref, child, update } from 'firebase/database';
+import { get, push, ref, update } from 'firebase/database';
 import { database } from '../config/firebase'
 import dbRealTime from '@react-native-firebase/database';
 

@@ -15,7 +15,6 @@ export const Share = ({ listId }) => {
   }
 
   const copyToClipboard = () => {
-    console.log('copied', listId)
     Clipboard.setString(listId)
     ToastAndroid.show('Copiado para área de transferência', ToastAndroid.SHORT);
   }

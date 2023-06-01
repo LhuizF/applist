@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
     const getUser = async () => {
       const user = await storage.getItem('user');
       if (user) {
-        console.log('aqui')
+
         setUser(user)
       }
     }

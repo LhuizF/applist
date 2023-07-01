@@ -149,5 +149,4 @@ class Firebase {
   }
 }
 
-
 export default new Firebase(database);

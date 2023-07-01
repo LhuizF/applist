@@ -16,34 +16,46 @@ class AuthService {
       }
     }
 
-    await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
-    const { idToken } = await GoogleSignin.signIn();
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+    try {
 
-    const userCredential = await auth().signInWithCredential(googleCredential)
-      .then((userCredential) => userCredential)
-      .catch((error) => {
-        console.log(error)
-        return null;
-      })
+      await GoogleSignin.hasPlayServices();
+      console.log('hasPlayServices')
+      const { idToken } = await GoogleSignin.signIn();
+      console.log('idToken', idToken)
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
-    if (!userCredential) {
+      const userCredential = await auth().signInWithCredential(googleCredential)
+        .then((userCredential) => userCredential)
+        .catch((error) => {
+          console.log(error)
+          return null;
+        })
+
+      if (!userCredential) {
+        return {
+          isSusses: false,
+          user: null
+        }
+      }
+
+      return {
+        isSusses: true,
+        user: {
+          id: userCredential.user.uid,
+          name: userCredential.user.displayName,
+          email: userCredential.user.email,
+          photo: userCredential.user.photoURL,
+          isNewUser: userCredential.additionalUserInfo.isNewUser,
+        }
+      };
+
+    } catch (error) {
+      console.log(error)
       return {
         isSusses: false,
         user: null
       }
     }
-
-    return {
-      isSusses: true,
-      user: {
-        id: userCredential.user.uid,
-        name: userCredential.user.displayName,
-        email: userCredential.user.email,
-        photo: userCredential.user.photoURL,
-        isNewUser: userCredential.additionalUserInfo.isNewUser,
-      }
-    };
   }
 
   async signOut() {

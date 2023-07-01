@@ -54,8 +54,8 @@ class Firebase {
             listArray.push({ key, ...listData[key] })
           }
         })
-        setList(listArray)
       }
+      setList(listArray)
     })
   }
 

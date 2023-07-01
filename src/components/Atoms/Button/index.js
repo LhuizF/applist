@@ -9,7 +9,11 @@ export const Button = ({ type, ...props }) => {
 
 const ButtonIcon = ({ text = '', onPress, icon, color, textColor }) => {
   return (
-    <ButtonContainer onPress={onPress} color={color}>
+    <ButtonContainer
+      onPress={onPress}
+      color={color}
+      activeOpacity={0.8}
+    >
       {icon}
       <Text textColor={textColor}>{text}</Text>
     </ButtonContainer>

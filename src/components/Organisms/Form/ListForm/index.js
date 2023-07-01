@@ -52,7 +52,7 @@ export const ListForm = ({ closeModal }) => {
   }
 
   return (
-    <Container>
+    <Container activeOpacity={1}>
       <Text>Crie uma nova lista</Text>
       <Input
         placeholder="Nome da lista"

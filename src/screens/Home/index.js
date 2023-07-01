@@ -8,6 +8,7 @@ import { useAuth } from "../../context/auth";
 import firebase from "../../services/firebase";
 import { useBottomModal } from '../../context/bottomModal'
 import { ListTable } from "../../components/Organisms/ListTable";
+import Lottie from 'lottie-react-native';
 
 export const Home = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -33,23 +34,26 @@ export const Home = ({ navigation }) => {
   }, [isLoading])
 
   return (
-    <Container isLoading={isLoading} center={list.length === 0}>
-      {!list.length > 0 ? (
-        <>
-          <Button
-            type={'icon'}
-            text="adicionar"
-            color={colors.primary}
-            textColor={colors.white}
-            icon={<AntDesign name="plus" size={24} color={colors.white} />}
-            onPress={() => openModal()}
-          />
-
-        </>
-      ) : (
+    <Container isLoading={false} center={list.length === 0}>
+      {isLoading ? (
+        <Lottie
+          source={require('../../assets/animation/loading.json')}
+          autoPlay
+          loop
+        />
+      ) : list.length > 0 ? (
         <ListTable lists={list} />
-      )
-      }
+      ) : (
+        <Button
+          type={'icon'}
+          text="Adicionar"
+          color={colors.primary}
+          textColor={colors.white}
+          icon={<AntDesign name="plus" size={24} color={colors.white} />}
+          onPress={() => openModal()}
+        />
+      )}
+
     </Container>
   );
 }

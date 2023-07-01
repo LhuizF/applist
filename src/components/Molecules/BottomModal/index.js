@@ -7,6 +7,7 @@ import { Container } from './styles'
 export const BottomModal = ({ children, isOpen, close, max = '40%' }) => {
 
   const bottomSheetRef = React.useRef(null);
+  const containerRef = React.useRef(null);
 
   React.useEffect(() => {
     if (isOpen) {
@@ -19,7 +20,11 @@ export const BottomModal = ({ children, isOpen, close, max = '40%' }) => {
   return (
     <>
       {isOpen &&
-        <Container onPress={close} >
+        <Container
+          ref={containerRef}
+          activeOpacity={1}
+          onPress={close}
+        >
           {children}
         </Container>
       }

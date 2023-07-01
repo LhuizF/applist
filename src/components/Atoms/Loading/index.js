@@ -6,7 +6,7 @@ export const Loading = ({ active }) => {
   return (
     <Container
       animating={active}
-      color={colors.white}
+      color={colors.primary}
       size="large"
     />
   )

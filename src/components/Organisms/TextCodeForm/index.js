@@ -7,7 +7,7 @@ import firebase from "../../../services/firebase";
 import { useAuth } from "../../../context/auth";
 
 export const TextCodeForm = ({ closeModal, navigation }) => {
-  const [text, setText] = useState('-NWUh6y6ADMjvnBoEHVX')
+  const [text, setText] = useState('')
   const { user } = useAuth()
 
   const submit = async () => {

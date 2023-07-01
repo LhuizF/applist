@@ -6,10 +6,12 @@ import { Button } from '../../../Atoms/Button';
 import colors from '../../../../theme/colors';
 import storage from '../../../../storage';
 import firebase from '../../../../services/firebase';
+import { set } from 'firebase/database';
 
 export const ListForm = ({ closeModal }) => {
   const [nameList, setNameList] = useState('');
   const [description, setDescription] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handlerCloseForm = () => {
     setNameList('');
@@ -18,15 +20,19 @@ export const ListForm = ({ closeModal }) => {
   }
 
   const handleSave = async () => {
+    if (isLoading) return;
+    setIsLoading(true);
     const user = await storage.getItem('user');
 
     if (!user) {
       ToastAndroid.show('Você precisa estar logado para criar uma lista', ToastAndroid.SHORT);
+      setIsLoading(false);
       return;
     }
 
     if (!nameList) {
       ToastAndroid.show('Você precisa informar o nome da lista', ToastAndroid.SHORT);
+      setIsLoading(false);
       return;
     }
 
@@ -43,6 +49,7 @@ export const ListForm = ({ closeModal }) => {
 
     if (!res) {
       ToastAndroid.show('Erro ao criar lista', ToastAndroid.SHORT);
+      setIsLoading(false);
       return
     }
 
@@ -72,6 +79,7 @@ export const ListForm = ({ closeModal }) => {
         color={colors.primary}
         textColor={colors.white}
         onPress={handleSave}
+        isLoading={isLoading}
       />
     </Container>
   );

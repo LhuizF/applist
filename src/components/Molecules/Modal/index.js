@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Container } from './styles';
-import { Modal } from 'react-native'
+import { Modal, TouchableOpacity } from 'react-native'
 
 export const ModalOptions = ({ children, active = false, closeModal }) => {
   return (

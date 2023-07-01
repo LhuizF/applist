@@ -7,9 +7,11 @@ import { FloatingButton } from "../../components/Atoms/FloatingButton";
 import { AddItem } from "../../components/Organisms/AddItem";
 import firebase from "../../services/firebase";
 import { useAuth } from '../../context/auth'
+import { DeleteList } from "../../components/Organisms/DeleteList";
 
 export const ListItems = ({ navigation, route }) => {
   const [modalVisible, setModalVisible] = useState(false)
+  const [modalDelete, setModalDelete] = useState(false)
   const { list } = route.params
 
   const { user } = useAuth()
@@ -39,12 +41,28 @@ export const ListItems = ({ navigation, route }) => {
 
       <TableItems listKey={list.key} />
 
-      <FloatingButton onPress={openModal} />
+      <FloatingButton
+        icon='plus'
+        position='right'
+        onPress={openModal}
+      />
+      <FloatingButton
+        icon='delete'
+        position="left"
+        onPress={() => setModalDelete(true)}
+      />
       <AddItem
         active={modalVisible}
-        openModal={() => setModalVisible(false)}
+        closeModal={() => setModalVisible(false)}
         listName={list.name}
         saveItem={saveItem}
+      />
+
+      <DeleteList
+        active={modalDelete}
+        closeModal={() => setModalDelete(false)}
+        list={list}
+        navigation={navigation}
       />
 
     </Container>

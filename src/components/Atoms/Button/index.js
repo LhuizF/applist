@@ -1,5 +1,8 @@
 import React from 'react';
 import { ButtonContainer, Image, Text } from './styles';
+import { Loading } from '../Loading';
+import colors from '../../../theme/colors';
+
 
 export const Button = ({ type, ...props }) => {
   if (!type) return null
@@ -7,7 +10,7 @@ export const Button = ({ type, ...props }) => {
   return buttonsTypes[type](props);
 }
 
-const ButtonIcon = ({ text = '', onPress, icon, color, textColor }) => {
+const ButtonIcon = ({ text = '', onPress, icon, color, textColor, isLoading = false }) => {
   return (
     <ButtonContainer
       onPress={onPress}
@@ -15,7 +18,9 @@ const ButtonIcon = ({ text = '', onPress, icon, color, textColor }) => {
       activeOpacity={0.8}
     >
       {icon}
-      <Text textColor={textColor}>{text}</Text>
+      <Text textColor={textColor}>
+        {isLoading ? <Loading color={colors.white} active /> : text}
+      </Text>
     </ButtonContainer>
   )
 }

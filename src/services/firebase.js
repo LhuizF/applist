@@ -1,4 +1,4 @@
-import { get, push, ref, child, update } from 'firebase/database';
+import { get, push, ref, child, update, remove } from 'firebase/database';
 import { database } from '../config/firebase'
 import dbRealTime from '@react-native-firebase/database';
 
@@ -146,6 +146,28 @@ class Firebase {
 
       return false
     })
+  }
+
+  async removeList({ listId, userId }) {
+    const listRef = ref(this.database, listId);
+
+    return get(listRef).then(async (snapshot) => {
+      if (snapshot.exists()) {
+        const listData = snapshot.val();
+        if (listData.users.includes(userId)) {
+          return await remove(listRef).then(() => {
+            console.log('Lista removida com sucesso!');
+            return true
+          }).catch((error) => {
+            console.error('Erro ao remover lista:', error);
+
+          })
+        }
+
+      }
+
+    })
+
   }
 }
 

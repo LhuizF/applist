@@ -12,7 +12,7 @@ export const Input = ({
     <Container>
       <CustomInput placeholder={placeholder} value={value} {...props} />
       {value && (
-        <Button onPress={cleanInput}>
+        <Button onPress={cleanInput} activeOpacity={0.8} >
           <AntDesign name="closecircleo" size={20} color="black" />
         </Button>
       )}

@@ -29,10 +29,6 @@ export const Home = ({ navigation }) => {
 
   }, [])
 
-  useEffect(() => {
-    console.log('isLoading::::', isLoading);
-  }, [isLoading])
-
   return (
     <Container isLoading={false} center={list.length === 0}>
       {isLoading ? (

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, ToastAndroid } from "react-native";
+import { View, Text, StyleSheet, ToastAndroid, TouchableOpacity } from "react-native";
 import { ModalOptions } from '../../Molecules/Modal'
 import colors from "../../../theme/colors";
 import { Input } from '../../Atoms/Input'
 import { Button } from "../../Atoms/Button";
 import { AntDesign } from '@expo/vector-icons';
 
-export const AddItem = ({ active, openModal, listName = '', saveItem }) => {
+
+export const AddItem = ({ active, closeModal, listName = '', saveItem }) => {
   const [itemNome, setItemNome] = useState('')
 
   function submit(item) {
@@ -21,13 +22,13 @@ export const AddItem = ({ active, openModal, listName = '', saveItem }) => {
 
   function handlerCloseForm() {
     setItemNome('')
-    openModal()
+    closeModal()
   }
 
   return (
     <ModalOptions active={active} closeModal={handlerCloseForm} >
       <View style={styles.container} >
-        <View style={styles.content} >
+        <TouchableOpacity style={styles.content} activeOpacity={1} >
           <Text style={styles.title}>Novo item</Text>
           <View style={styles.form} >
             <Text style={styles.subTitle} >Lista {listName}</Text>
@@ -45,7 +46,7 @@ export const AddItem = ({ active, openModal, listName = '', saveItem }) => {
               onPress={() => submit(itemNome)}
             />
           </View>
-        </View>
+        </TouchableOpacity>
       </View>
     </ModalOptions>
   )

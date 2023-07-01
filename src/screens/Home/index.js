@@ -28,6 +28,10 @@ export const Home = ({ navigation }) => {
 
   }, [])
 
+  useEffect(() => {
+    console.log('isLoading::::', isLoading);
+  }, [isLoading])
+
   return (
     <Container isLoading={isLoading} center={list.length === 0}>
       {!list.length > 0 ? (

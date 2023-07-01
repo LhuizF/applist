@@ -8,4 +8,6 @@ export const Container = styled.View`
   background-color: ${colors.gray};
   border-radius: 20px;
   margin-bottom: 60px;
+  align-items: center;
+  justify-content: center;
 `;

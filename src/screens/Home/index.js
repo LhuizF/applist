@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 import { Container } from '../../components/Templates/container';
 import { Button } from '../../components/Atoms/Button';
 import colors from "../../theme/colors";
@@ -40,14 +40,28 @@ export const Home = ({ navigation }) => {
       ) : list.length > 0 ? (
         <ListTable lists={list} />
       ) : (
-        <Button
-          type={'icon'}
-          text="Adicionar"
-          color={colors.primary}
-          textColor={colors.white}
-          icon={<AntDesign name="plus" size={24} color={colors.white} />}
-          onPress={() => openModal()}
-        />
+        <View>
+          <View
+            style={{
+              width: 200,
+              height: 200,
+            }}
+          >
+            <Lottie
+              source={require('../../assets/animation/empty-list.json')}
+              autoPlay
+              loop={false}
+            />
+          </View>
+          <Button
+            type={'icon'}
+            text="Adicionar"
+            color={colors.primary}
+            textColor={colors.white}
+            icon={<AntDesign name="plus" size={24} color={colors.white} />}
+            onPress={() => openModal()}
+          />
+        </View>
       )}
 
     </Container>

@@ -29,7 +29,11 @@ export const JoinList = ({ navigation }) => {
           icon={<MaterialCommunityIcons name="cursor-text" size={20} color="#fff" />}
           onPress={() => setModalVisible(true)}
         />
-        <OptionCard title="Escanear QRcode" icon={<FontAwesome name="qrcode" size={20} color="#fff" />} />
+        <OptionCard
+          title="Escanear QRcode"
+          icon={<FontAwesome name="qrcode" size={20} color="#fff" />}
+          onPress={() => navigation.navigate('Scanner')}
+        />
       </View>
 
       <ModalOptions active={modalVisible} closeModal={closeModal}>

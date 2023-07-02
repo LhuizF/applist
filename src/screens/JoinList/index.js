@@ -17,11 +17,11 @@ export const JoinList = ({ navigation }) => {
 
   return (
     <Container>
-      <Text>AddList</Text>
       <View style={{
         flexDirection: 'column',
         paddingHorizontal: 20,
         width: '100%',
+        marginTop: 20,
       }}
       >
         <OptionCard

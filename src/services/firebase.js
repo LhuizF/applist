@@ -154,18 +154,16 @@ class Firebase {
     return get(listRef).then(async (snapshot) => {
       if (snapshot.exists()) {
         const listData = snapshot.val();
-        if (listData.users.includes(userId)) {
+
+        if (listData.orderId === userId) {
           return await remove(listRef).then(() => {
             console.log('Lista removida com sucesso!');
             return true
           }).catch((error) => {
             console.error('Erro ao remover lista:', error);
-
           })
         }
-
       }
-
     })
 
   }

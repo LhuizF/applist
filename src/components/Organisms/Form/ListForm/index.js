@@ -6,7 +6,6 @@ import { Button } from '../../../Atoms/Button';
 import colors from '../../../../theme/colors';
 import storage from '../../../../storage';
 import firebase from '../../../../services/firebase';
-import { set } from 'firebase/database';
 
 export const ListForm = ({ closeModal }) => {
   const [nameList, setNameList] = useState('');
@@ -40,6 +39,7 @@ export const ListForm = ({ closeModal }) => {
       users: {
         0: user.id
       },
+      orderId: user.id,
       name: nameList,
       description,
       createdAt: new Date().toISOString()

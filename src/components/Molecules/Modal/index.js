@@ -9,7 +9,7 @@ export const ModalOptions = ({ children, active = false, closeModal }) => {
       visible={active}
       animationType="none"
     >
-      <Container onPress={closeModal} >
+      <Container onPress={closeModal} activeOpacity={1} >
         {children}
       </Container>
     </Modal>

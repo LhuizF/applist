@@ -15,15 +15,13 @@ export const DeleteList = ({ active, closeModal, list, navigation }) => {
       userId: user.id
     })
 
-    console.log('aaaaaaa', isSuccess)
-
     if(isSuccess) {
       ToastAndroid.show('Lista removida com sucesso!', ToastAndroid.SHORT)
       closeModal()
       navigation.goBack()
       return;
     }
-    console.log('aaaaaaaAAAAAAAAAAA')
+
     ToastAndroid.show('Erro ao remover lista!', ToastAndroid.SHORT)
   }
 

@@ -1,6 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Login, Home, ListItems, JoinList } from "../screens";
+import { Login, Home, ListItems, JoinList, Scanner } from "../screens";
 import colors from "../theme/colors";
 import { MenuOptions } from '../components/Organisms/MenuOptions'
 import { useAuth } from "../context/auth";
@@ -46,6 +46,8 @@ export const Navigation = () => {
           },
           title: 'Entrar em uma lista'
         }} />
+
+        <Stack.Screen name="Scanner" component={Scanner} />
       </Stack.Navigator>
     </NavigationContainer>
   );

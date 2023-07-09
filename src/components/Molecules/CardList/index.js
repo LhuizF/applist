@@ -8,10 +8,8 @@ export const CardList = ({ list }) => {
   const navigation = useNavigation()
 
   const onPress = () => {
-    navigation.navigate('ListItems', { list })
+    navigation.navigate('ListItems', { listId: list.key })
   }
-
-  //console.log(list)
 
   return (
     <Container activeOpacity={0.8} onPress={onPress} >

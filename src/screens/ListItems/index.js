@@ -8,12 +8,13 @@ import { AddItem } from "../../components/Organisms/AddItem";
 import firebase from "../../services/firebase";
 import { useAuth } from '../../context/auth'
 import { DeleteList } from "../../components/Organisms/DeleteList";
+import Lottie from 'lottie-react-native';
 
 export const ListItems = ({ navigation, route }) => {
   const [modalVisible, setModalVisible] = useState(false)
   const [modalDelete, setModalDelete] = useState(false)
-  const 
-  const { list } = route.params
+  const [list, setList] = useState({})
+  const { listId } = route.params
 
   const { user } = useAuth()
 
@@ -33,12 +34,27 @@ export const ListItems = ({ navigation, route }) => {
 
     const res = await firebase.insertItem(list.key, newItem)
 
-    //console.log(res)
   }
 
   useEffect(() => {
-    console.log(list)
+    (async () => {
+      const res = await firebase.findListById(listId)
+      setList(res)
+    })()
   }, [])
+
+
+  if (!list) {
+    return (
+      <Container color={colors.gray} >
+        <Lottie
+          source={require('../../assets/animation/loading.json')}
+          autoPlay
+          loop
+        />
+      </Container>
+    )
+  }
 
   return (
     <Container color={colors.gray} >

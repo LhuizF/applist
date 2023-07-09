@@ -165,7 +165,18 @@ class Firebase {
         }
       }
     })
+  }
 
+  async findListById(listId) {
+    const listRef = ref(this.database, listId);
+
+    return get(listRef).then((snapshot) => {
+      if (snapshot.exists()) {
+        const listData = snapshot.val();
+        return listData
+      }
+      return null
+    })
   }
 }
 

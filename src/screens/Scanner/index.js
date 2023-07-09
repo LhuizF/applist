@@ -35,7 +35,7 @@ export const Scanner = ({ navigation }) => {
   const frameProcessor = useFrameProcessor((frame) => {
     'worklet';
     const detectedBarcodes = scanBarcodes(frame, [BarcodeFormat.QR_CODE], { checkInverted: true });
-    console.log(detectedBarcodes)
+
     runOnJS(setCodes)(detectedBarcodes);
   }, [])
 
@@ -60,7 +60,10 @@ export const Scanner = ({ navigation }) => {
         setLoading(false)
       }, 2000)
       ToastAndroid.show('Lista não encontrada', ToastAndroid.SHORT);
+      return;
     }
+
+    navigation.navigate('ListItems', { listId: listId })
   }
 
 

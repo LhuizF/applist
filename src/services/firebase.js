@@ -178,6 +178,18 @@ class Firebase {
       return null
     })
   }
+
+  async deleteItem({ listId, itemId }) {
+    const itemRef = ref(this.database, listId + '/items/' + itemId);
+
+    return await remove(itemRef).then(() => {
+      console.log('Item removido com sucesso!');
+      return true
+    }).catch((error) => {
+      console.error('Erro ao remover item:', error);
+      return false
+    })
+  }
 }
 
 

@@ -67,11 +67,13 @@ export const ListItems = ({ navigation, route }) => {
         position='right'
         onPress={openModal}
       />
-      <FloatingButton
-        icon='delete'
-        position="left"
-        onPress={() => setModalDelete(true)}
-      />
+      {list.orderId === user.id && (
+        <FloatingButton
+          icon='delete'
+          position="left"
+          onPress={() => setModalDelete(true)}
+        />
+      )}
       <AddItem
         active={modalVisible}
         closeModal={() => setModalVisible(false)}

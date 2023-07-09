@@ -32,7 +32,7 @@ export const ListItems = ({ navigation, route }) => {
       userId: user.id,
     }
 
-    const res = await firebase.insertItem(list.key, newItem)
+    const res = await firebase.insertItem(listId, newItem)
 
   }
 
@@ -60,7 +60,7 @@ export const ListItems = ({ navigation, route }) => {
     <Container color={colors.gray} >
       <ListItemsHeader title={list.name} />
 
-      <TableItems listKey={list.key} />
+      <TableItems listKey={listId} />
 
       <FloatingButton
         icon='plus'

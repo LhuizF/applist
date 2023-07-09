@@ -47,7 +47,15 @@ export const Navigation = () => {
           title: 'Entrar em uma lista'
         }} />
 
-        <Stack.Screen name="Scanner" component={Scanner} />
+        <Stack.Screen name="Scanner" component={Scanner}
+          options={{
+            headerTintColor: colors.white,
+            headerStyle: {
+              backgroundColor: colors.primary
+            },
+            title: 'Scanner QRCode'
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

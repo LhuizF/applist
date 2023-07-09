@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from '../../components/Templates/container';
 import { ListItemsHeader } from '../../components/Atoms/ListItemsHeader';
 import { TableItems } from "../../components/Organisms/TableItems";
@@ -12,6 +12,7 @@ import { DeleteList } from "../../components/Organisms/DeleteList";
 export const ListItems = ({ navigation, route }) => {
   const [modalVisible, setModalVisible] = useState(false)
   const [modalDelete, setModalDelete] = useState(false)
+  const 
   const { list } = route.params
 
   const { user } = useAuth()
@@ -34,6 +35,10 @@ export const ListItems = ({ navigation, route }) => {
 
     //console.log(res)
   }
+
+  useEffect(() => {
+    console.log(list)
+  }, [])
 
   return (
     <Container color={colors.gray} >

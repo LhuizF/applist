@@ -1,37 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, StyleSheet, ToastAndroid, TouchableOpacity } from "react-native";
 import { ModalOptions } from '../../Molecules/Modal'
-import colors from "../../../theme/colors"
+import colors from "../../../theme/colors";
 import { Button } from "../../Atoms/Button";
-import firebase from "../../../services/firebase";
-import { useAuth } from "../../../context/auth";
 
-export const DeleteList = ({ active, closeModal, list, navigation }) => {
-  const { user } = useAuth()
 
-  async function submit() {
-    const isSuccess = await firebase.removeList({
-      listId: list.id,
-      userId: user.id
-    })
+export const DeleteItem = ({ active, closeModal, item, deleteItem }) => {
 
-    if(isSuccess) {
-      ToastAndroid.show('Lista removida com sucesso!', ToastAndroid.SHORT)
-      closeModal()
-      navigation.goBack()
-      return;
-    }
-
-    ToastAndroid.show('Erro ao remover lista!', ToastAndroid.SHORT)
+  function submit() {
+    deleteItem(item)
+    closeModal()
   }
 
   return (
     <ModalOptions active={active} closeModal={closeModal} >
       <View style={styles.container} >
         <TouchableOpacity style={styles.content} activeOpacity={1} >
-          <Text style={styles.title}>Tem certeza que você deseja remover essa lista?</Text>
+          <Text style={styles.title}>Tem certeza que você deseja remover esse item?</Text>
           <View style={styles.form} >
-            <Text style={styles.subTitle} >Lista: {list.name}</Text>
+            <Text style={styles.subTitle} >{item.name}</Text>
 
             <View style={styles.buttonContainer}>
               <Button

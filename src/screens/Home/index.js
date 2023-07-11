@@ -23,30 +23,36 @@ export const Home = ({ navigation }) => {
           console.log(err);
         })
         .finally(() => {
-          setIsLoading(false);
+          setInterval(() => {
+            setIsLoading(false);
+          }, 2000)
         });
     }
 
   }, [])
 
-  return (
-    <Container isLoading={false} center={list.length === 0}>
-      {isLoading ? (
+  if (isLoading) {
+    return (
+      <Container center={true}>
         <Lottie
           source={require('../../assets/animation/loading.json')}
           autoPlay
           loop
         />
-      ) : list.length > 0 ? (
+      </Container>
+    )
+  }
+
+  return (
+    <Container isLoading={false} center={list.length === 0}>
+      {list.length > 0 ? (
         <ListTable lists={list} />
       ) : (
         <View>
-          <View
-            style={{
-              width: 200,
-              height: 200,
-            }}
-          >
+          <View style={{
+            width: 200,
+            height: 200,
+          }}>
             <Lottie
               source={require('../../assets/animation/empty-list.json')}
               autoPlay

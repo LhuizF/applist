@@ -1,24 +1,32 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Pressable } from "react-native";
 import colors from "../../../theme/colors";
 import { formattedDate } from '../../../utils'
 import firebase from "../../../services/firebase";
+import { DeleteItem } from "../DeleteItem";
 
 export const TableItems = ({ listKey }) => {
   const [itemsState, setItemsState] = React.useState([])
-  firebase.findItensByListId(listKey, setItemsState)
+  const [item, setItem] = React.useState(null)
 
+  firebase.findItensByListId(listKey, setItemsState)
 
   function onPressItem(item) {
     firebase.checkItem({ listId: listKey, itemId: item.key, checked: !item.checked })
   }
 
+  function onPressDeleteItem(item) {
+    firebase.deleteItem({ listId: listKey, itemId: item.key })
+  }
+
   const renderItem = ({ item, index }) => {
     return (
-      <TouchableOpacity
+      <Pressable
+        key={index}
         style={styles.card}
         activeOpacity={0.8}
-        onPress={() => onPressItem(item)} key={index}
+        onPress={() => onPressItem(item)}
+        onLongPress={() => setItem(item)}
       >
         <Text style={{ ...styles.title, textDecorationLine: item.checked ? 'line-through' : 'none' }} >
           {item.name}
@@ -31,7 +39,7 @@ export const TableItems = ({ listKey }) => {
             {!!item.completeDate && <Text style={styles.dateText} >Concluído em {formattedDate(item.completeDate)}</Text>}
           </View>
         </View>
-      </TouchableOpacity>
+      </Pressable>
     )
   }
 
@@ -50,6 +58,15 @@ export const TableItems = ({ listKey }) => {
           </>
         )
       }
+
+      {!!item && (
+        <DeleteItem
+          active={!!item}
+          closeModal={() => setItem(null)}
+          item={item}
+          deleteItem={onPressDeleteItem}
+        />
+      )}
     </ScrollView>
   );
 }

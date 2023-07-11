@@ -165,7 +165,30 @@ class Firebase {
         }
       }
     })
+  }
 
+  async findListById(listId) {
+    const listRef = ref(this.database, listId);
+
+    return get(listRef).then((snapshot) => {
+      if (snapshot.exists()) {
+        const listData = snapshot.val();
+        return listData
+      }
+      return null
+    })
+  }
+
+  async deleteItem({ listId, itemId }) {
+    const itemRef = ref(this.database, listId + '/items/' + itemId);
+
+    return await remove(itemRef).then(() => {
+      console.log('Item removido com sucesso!');
+      return true
+    }).catch((error) => {
+      console.error('Erro ao remover item:', error);
+      return false
+    })
   }
 }
 

@@ -37,6 +37,9 @@
         "projectId": "86638ace-de25-4b35-b128-17f4108d8c93"
       }
     },
-    "plugins":  ["@react-native-google-signin/google-signin"]
+    "plugins": [
+      "@react-native-google-signin/google-signin",
+      "react-native-vision-camera"
+    ]
   }
 }

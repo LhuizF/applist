@@ -1,3 +1,4 @@
+import 'react-native-reanimated';
 import { useEffect } from 'react';
 import { StatusBar } from 'react-native';
 import { Navigation } from './src/navigation'

@@ -84,7 +84,10 @@ export const ListItems = ({ navigation, route }) => {
       <DeleteList
         active={modalDelete}
         closeModal={() => setModalDelete(false)}
-        list={list}
+        list={{
+          ...list,
+          id: listId
+        }}
         navigation={navigation}
       />
 

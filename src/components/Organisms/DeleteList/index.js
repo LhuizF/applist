@@ -11,7 +11,7 @@ export const DeleteList = ({ active, closeModal, list, navigation }) => {
 
   async function submit() {
     const isSuccess = await firebase.removeList({
-      listId: list.key,
+      listId: list.id,
       userId: user.id
     })
 

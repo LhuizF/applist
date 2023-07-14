@@ -1,6 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Login, Home, ListItems, JoinList, Scanner } from "../screens";
+import { Login, Home, ListItems, JoinList, Scanner, About } from "../screens";
 import colors from "../theme/colors";
 import { MenuOptions } from '../components/Organisms/MenuOptions'
 import { useAuth } from "../context/auth";
@@ -61,6 +61,15 @@ export const Navigation = () => {
               backgroundColor: colors.primary
             },
             title: 'Scanner QRCode'
+          }}
+        />
+        <Stack.Screen name="About" component={About}
+          options={{
+            headerTintColor: colors.white,
+            headerStyle: {
+              backgroundColor: colors.primary
+            },
+            title: 'Sobre'
           }}
         />
       </Stack.Navigator>

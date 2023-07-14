@@ -27,11 +27,17 @@ export const Menu = ({ closeModal }) => {
     openModal();
   }
 
+  const openAbout = () => {
+    closeModal();
+    navigation.navigate('About');
+  }
+
   return (
     <Container>
       <TextButton text='Adicionar lista' onPress={openListForm} />
       <TextButton text='Entrar em uma lista' onPress={goToJoinList} />
       <TextButton text='Sair' onPress={logout} />
+      <TextButton text='Sobre' onPress={openAbout} />
     </Container>
   );
 }

@@ -4,8 +4,8 @@ buildscript {
     ext {
         buildToolsVersion = findProperty('android.buildToolsVersion') ?: '31.0.0'
         minSdkVersion = Integer.parseInt(findProperty('android.minSdkVersion') ?: '21')
-        compileSdkVersion = Integer.parseInt(findProperty('android.compileSdkVersion') ?: '31')
-        targetSdkVersion = Integer.parseInt(findProperty('android.targetSdkVersion') ?: '31')
+        compileSdkVersion = Integer.parseInt(findProperty('android.compileSdkVersion') ?: '33')
+        targetSdkVersion = Integer.parseInt(findProperty('android.targetSdkVersion') ?: '33')
         kotlin_version = '1.6.10'
 
         VisionCameraCodeScanner_targetSdkVersion = 31 //add
@@ -45,7 +45,7 @@ def REACT_NATIVE_VERSION = new File(['node', '--print', "JSON.parse(require('fs'
 allprojects {
     configurations.all {
         resolutionStrategy {
-            force "com.facebook.react:react-native:" + REACT_NATIVE_VERSION
+            force 'androidx.work:work-runtime:2.6.0'
         }
     }
 

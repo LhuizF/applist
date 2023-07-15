@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Login, Home, ListItems, JoinList, Scanner, About } from "../screens";
@@ -6,11 +7,37 @@ import { MenuOptions } from '../components/Organisms/MenuOptions'
 import { useAuth } from "../context/auth";
 import { Share } from '../components/Organisms/Share'
 import { HeaderBackButton } from "@react-navigation/elements";
+import notifee, { EventType } from '@notifee/react-native';
 
 const Stack = createStackNavigator();
 
 export const Navigation = () => {
   const { user } = useAuth();
+
+  useEffect(() => {
+    return notifee.onForegroundEvent(({ type, detail }) => {
+      if (type === EventType.DISMISSED) {
+        console.log('User dismissed notification')
+        return;
+      }
+
+      if (type === EventType.PRESS) {
+        console.log(detail.notification)
+        return;
+      }
+
+    })
+  }, [])
+
+  useEffect(() => {
+    return notifee.onBackgroundEvent(({ type, detail }) => {
+
+      if (type === EventType.PRESS) {
+        console.log(detail.notification, 'aaaaaaaaaa')
+      }
+
+    })
+  }, [])
 
   return (
     <NavigationContainer>

@@ -4,6 +4,7 @@ import colors from "../../../theme/colors";
 import { formattedDate } from '../../../utils'
 import firebase from "../../../services/firebase";
 import { DeleteItem } from "../DeleteItem";
+import Animated, { FadeIn, ZoomOut, ZoomIn } from "react-native-reanimated";
 
 export const TableItems = ({ listKey }) => {
   const [itemsState, setItemsState] = React.useState([])
@@ -21,25 +22,31 @@ export const TableItems = ({ listKey }) => {
 
   const renderItem = ({ item, index }) => {
     return (
-      <Pressable
+      <Animated.View
         key={index}
-        style={styles.card}
-        activeOpacity={0.8}
-        onPress={() => onPressItem(item)}
-        onLongPress={() => setItem(item)}
+        entering={ZoomIn}
+        exiting={ZoomOut}
       >
-        <Text style={{ ...styles.title, textDecorationLine: item.checked ? 'line-through' : 'none' }} >
-          {item.name}
-        </Text>
-        <View style={{ flexDirection: 'column', justifyContent: 'space-between' }} >
-          <View style={{ flexDirection: 'row', }} >
-            <Text style={styles.dateText} >Criado em {formattedDate(item.createdAt)}</Text>
+        <Pressable
+
+          style={styles.card}
+          activeOpacity={0.8}
+          onPress={() => onPressItem(item)}
+          onLongPress={() => setItem(item)}
+        >
+          <Text style={{ ...styles.title, textDecorationLine: item.checked ? 'line-through' : 'none' }} >
+            {item.name}
+          </Text>
+          <View style={{ flexDirection: 'column', justifyContent: 'space-between' }} >
+            <View style={{ flexDirection: 'row', }} >
+              <Text style={styles.dateText} >Criado em {formattedDate(item.createdAt)}</Text>
+            </View>
+            <View style={{ flexDirection: 'row', }} >
+              {!!item.completeDate && <Text style={styles.dateText} >Concluído em {formattedDate(item.completeDate)}</Text>}
+            </View>
           </View>
-          <View style={{ flexDirection: 'row', }} >
-            {!!item.completeDate && <Text style={styles.dateText} >Concluído em {formattedDate(item.completeDate)}</Text>}
-          </View>
-        </View>
-      </Pressable>
+        </Pressable>
+      </Animated.View>
     )
   }
 

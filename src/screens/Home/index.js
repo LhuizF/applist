@@ -61,7 +61,7 @@ export const Home = ({ navigation }) => {
           </View>
           <Button
             type={'icon'}
-            text="Adicionar"
+            text="Criar lista"
             color={colors.primary}
             textColor={colors.white}
             icon={<AntDesign name="plus" size={24} color={colors.white} />}

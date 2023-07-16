@@ -25,7 +25,7 @@ export const JoinList = ({ navigation }) => {
       }}
       >
         <OptionCard
-          title="Digitar Código"
+          title="Digitar código"
           icon={<MaterialCommunityIcons name="cursor-text" size={20} color="#fff" />}
           onPress={() => setModalVisible(true)}
         />

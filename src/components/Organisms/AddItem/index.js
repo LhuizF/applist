@@ -39,7 +39,7 @@ export const AddItem = ({ active, closeModal, listName = '', saveItem }) => {
             />
             <Button
               type={'icon'}
-              text="Adicionar"
+              text="Salvar"
               color={colors.primary}
               textColor={colors.white}
               icon={<AntDesign name="plus" size={24} color={colors.white} />}

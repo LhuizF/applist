@@ -6,6 +6,7 @@
 
 APP List é um aplicativo para criar e compartilhar listas de itens ou tarefas.
 
+[Download do app](https://bit.ly/3rvbgLd) (APK andoird)
 ## Principais Recursos
 
 - Crie listas de itens ou tarefas
@@ -14,7 +15,6 @@ APP List é um aplicativo para criar e compartilhar listas de itens ou tarefas.
 - Marque itens como concluídos para acompanhar o progresso.
 - Exclua listas e itens conforme necessário.
 - As listas e itens são atualizados em tempo real usando a tecnologia Firebase Realtime Database.
-
 
 ## Uso
 
@@ -46,7 +46,6 @@ APP List é um aplicativo para criar e compartilhar listas de itens ou tarefas.
 - Firebase Auth
 - Firebase Database
 - Vision Camera
-
 
 ## Print
 ![print-01](https://github.com/LhuizF/applist/assets/80434677/e72b47ea-6373-47e2-9887-744772a7b9b3)

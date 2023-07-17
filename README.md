@@ -43,3 +43,14 @@ APP List é um aplicativo para criar e compartilhar listas de itens ou tarefas.
 - Firebase Database
 - Vision Camera
 
+
+## Print
+![print-01](https://github.com/LhuizF/applist/assets/80434677/e72b47ea-6373-47e2-9887-744772a7b9b3)
+![print-02](https://github.com/LhuizF/applist/assets/80434677/fd68be4c-81bd-4333-8344-ccef95e375a0)
+![print-03](https://github.com/LhuizF/applist/assets/80434677/c041131d-71e0-4b0a-bc20-d9d454543b1c)
+![print-04](https://github.com/LhuizF/applist/assets/80434677/afdada16-101d-4126-ae65-117f5f90b5ec)
+![print-05](https://github.com/LhuizF/applist/assets/80434677/258e27c3-c69e-42df-b5c8-75af7e684037)
+![print-06](https://github.com/LhuizF/applist/assets/80434677/84cec5ad-d858-477c-b554-ac1628fa4cb4)
+![print-07](https://github.com/LhuizF/applist/assets/80434677/d6f9e5dc-bb94-4ae1-8fca-602df11c371d)
+![print-08](https://github.com/LhuizF/applist/assets/80434677/ea2588e5-c8b2-4a68-9dec-73a90bb075cb)
+

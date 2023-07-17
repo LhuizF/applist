@@ -1,4 +1,8 @@
-# APP List
+<div align="center" style="display: flex; flex-direction: column; align-items: center;">
+  <h1 align="center">APP List</h1>
+  <img src="https://github.com/LhuizF/applist/assets/80434677/f7e4b59c-687d-4907-baa5-28cba8e5a379" width="200" height="200" />
+</div>
+
 
 APP List é um aplicativo para criar e compartilhar listas de itens ou tarefas.
 
